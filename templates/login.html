@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link href="{{ url_for('static', filename='login.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='login.css')}}" rel="stylesheet" media="screen"> 
     <title>Login</title>
 </head>
 <body>
+    <div class="container"> 
+        <h1>Please login</h1>
+        <br> 
+        <form action="" method="POST">
+            <input type="text" placeholder="Username" name="username" value="{{ 
+                request.form.username }}"> 
+            <input type="password" placeholder="Password" name="password" value="{{
+                request.form.password }}">
+            <input class="btn btn-default" type="submit" value="login">
+        </form>
+        {% if error %}
+            <p class="error"><strong>ERROR:</strong> {{ error }}</p>
+        {% endif %}
+    </div>
     
 </body>
 </html>
