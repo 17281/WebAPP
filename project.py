@@ -3,11 +3,14 @@
 Harry .C 
 Project:webapp
 '''
-from flask import Flask, render_template, request, g, redirect, url_for
+from flask import Flask, render_template, request, g, redirect, url_for, session
 import sqlite3
 
-DATABASE = 'User.db'
 app = Flask(__name__)
+app.secret_key = "my precious"
+
+DATABASE = 'User.db'
+
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -22,13 +25,17 @@ def close_connection(exception):
         db.close()
 
 database = None
-#home page for the users
+#index page
 @app.route('/')
-def home():
-    cursor = get_db().cursor()
-    error = None
-
+def index():
     return render_template("index.html")
+
+@app.route('/home', methods=['GET', 'POST'])
+def home():
+    #if session['logged_in'] = True: 
+        #CHANGE stuff only if admin logs in-------
+    return render_template("shop.html")
+
 
 #Admin login 
 @app.route('/login' , methods=['GET', 'POST'])
@@ -43,9 +50,9 @@ def login():
     return render_template("login.html", error=error)
 
 @app.route('/logout')
-    def logout():
-       session.pop('logged_in', None)
-       return redirect(url_for('home')) 
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('index')) 
 
 #Debuging incase of error
 if __name__ == '__main__':
