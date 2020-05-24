@@ -8,5 +8,13 @@
 </head>
 <body>
     <h1>Working progress</h1>
+    <div class="container">
+        <br>
+        <p>Click <a href="/login">here</a> to login.</p>
+        {% for message in get_flashed_messages() %}
+            {{ message }}
+        {% endfor %}
+        <p>Click <a href="/logout">here</a> to logout.</p>
+    </div>
 </body>
 </html>
