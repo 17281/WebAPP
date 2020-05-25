@@ -14,7 +14,21 @@
         {% for message in get_flashed_messages() %}
             {{ message }}
         {% endfor %}
+        <br>
+
+        <br>
         <p>Click <a href="/logout">here</a> to logout.</p>
+        <br>
     </div>
+
+    <br>
+    <h3>Menu</h3>
+    {% for post in posts %}
+        <strong>Name:</strong> {{ post.Name }} <br>
+        <br>
+        <strong>Description</strong> {{ post.Description }} <br>
+    {% endfor %}
+    <br>
+
 </body>
 </html>
