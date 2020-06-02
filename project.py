@@ -9,11 +9,20 @@ from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = "my precious"
-app.database = "Menu.db"
+DATABASE = "Menu.db"
 
 
-def connect_db():
-    return sqlite3.connect(app.database)
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
 
 def login_required(f):
     @wraps(f)
@@ -35,10 +44,14 @@ def index():
 def home():
     #if session['logged_in'] in session: 
         #CHANGE stuff only if admin logs in-------
-    g.db = connect_db() #estabilshes database connection
+    """g.db = get_db() #estabilshes database connection
     cur = g.db.execute('select * FROM Food')
-    posts = [dict(Name=row[0], Description=row[1]) for row in cur.fetchall()]
-    return render_template("shop.html", posts=posts) #renders a templet 
+    posts = [dict(Name=row[1], Description=row[2]) for row in cur.fetchall()]"""
+    cursor = get_db().cursor()
+    sql = ("SELECT * FROM Food")
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    return render_template("shop.html", results=results) #renders a templet 
 
 
 #Admin login 
@@ -57,8 +70,6 @@ def login():
             session['logged_in'] = True
             flash('You are logged in as Admin') #tell user that they logged in
             return redirect(url_for('home')) #Move to home if admin is true
-        
-        
     return render_template("login.html", error=error) #renders the templet
 
 #Logout
@@ -69,6 +80,22 @@ def logout():
     session.pop('logged_in', None)
     flash('You have logged out') #tells user that they logged out
     return redirect(url_for('index')) #send user back to index page
+
+
+
+@app.route('/delete', methods=["GET","POST"])
+def delete():
+    if request.method == "POST":
+        #get item and delete with data base
+        cursor = get_db().cursor()
+        id = int(request.form["item_name"])
+        sql = ("DELETE FROM Food WHERE ID=?")
+        cursor.execute(sql,(id,))
+        get_db().commit()
+    return redirect('/home')
+
+
+
 
 #Debuging incase of error
 if __name__ == '__main__':

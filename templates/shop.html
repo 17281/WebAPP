@@ -9,26 +9,47 @@
 <body>
     <h1>Working progress</h1>
     <div class="container">
+        
+        <form action="/login">
         <br>
-        <p>Click <a href="/login">here</a> to login.</p>
+        <input type='submit' value='Login'>
         {% for message in get_flashed_messages() %}
             {{ message }}
         {% endfor %}
         <br>
+        </form>
 
+        <form action="/logout">
         <br>
-        <p>Click <a href="/logout">here</a> to logout.</p>
+        <input type="submit" value='Logout'>
         <br>
+        </form>
     </div>
 
-    <br>
+    
     <h3>Menu</h3>
-    {% for post in posts %}
-        <strong>Name:</strong> {{ post.Name }} <br>
-        <br>
-        <strong>Description</strong> {{ post.Description }} <br>
-    {% endfor %}
-    <br>
+    <table>
+        <tr>
+           <th>Name</th>
+           <th>Description</th>
+           <th>Delete?</th>
+        </tr>
+        {% for item in results  %}
+        <tr>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>
+                <form action="/delete" method="post">
+                <input type="hidden" name="item_name" value="{{item[0]}}"> 
+                <input type="submit" value="delete">
+            </form>
+            
+            </td>
+        </tr> 
+        {%endfor%}
+
+    
+    
 
 </body>
 </html>
