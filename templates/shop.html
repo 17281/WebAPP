@@ -28,28 +28,46 @@
 
     
     <h3>Menu</h3>
-    <table>
+    <br><table>
         <tr>
            <th>Name</th>
            <th>Description</th>
-           <th>Delete?</th>
+           
         </tr>
-        {% for item in results  %}
+        {% for item in results %}
         <tr>
             <td>{{ item[1] }}</td>
             <td>{{ item[2] }}</td>
-            <td>
-                <form action="/delete" method="post">
-                <input type="hidden" name="item_name" value="{{item[0]}}"> 
-                <input type="submit" value="delete">
-            </form>
             
-            </td>
-        </tr> 
-        {%endfor%}
+            
+      </tr>
+        {% endfor %}
+    
 
-    
-    
+        </table>
+        <table>
+            <tr>
+                <th>Comments</th>
+            </tr>
+        {% for comment in comments %}
+        <tr>
+            <td>{{ comment[0] }}</td>  
+             
+        <td>
+            <form action="/delete" method="post">
+            <input type="hidden" name="item_name" value="{{comment[1]}}"> 
+            <input type="submit" value="delete">
+            </form>
+        </td>
+        </tr>
+        {% endfor %}
+
+        </table>
+        <form action="/add" method="post">
+            <h2>Enter Comment</h2>
+            <input type="text" name="Comment">
+            <input type="submit" value="add">
+            </form>
 
 </body>
 </html>

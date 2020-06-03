@@ -42,16 +42,25 @@ def index():
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    #if session['logged_in'] in session: 
-        #CHANGE stuff only if admin logs in-------
-    """g.db = get_db() #estabilshes database connection
-    cur = g.db.execute('select * FROM Food')
-    posts = [dict(Name=row[1], Description=row[2]) for row in cur.fetchall()]"""
     cursor = get_db().cursor()
     sql = ("SELECT * FROM Food")
     cursor.execute(sql)
     results = cursor.fetchall()
-    return render_template("shop.html", results=results) #renders a templet 
+    cursor = get_db().cursor()
+    sql = ("SELECT User.Comments, User.CommentID FROM Food JOIN User ON Food.ID=User.FoodID")
+    cursor.execute(sql)
+    comments = cursor.fetchall()
+
+    return render_template("shop.html", results=results, comments=comments) #renders a templet 
+
+
+
+
+#Comments from users
+@app.route('/comments', methods=['GET','POST'])
+def user():
+    
+    return render_template("shop.html", comments=comments)
 
 
 #Admin login 
@@ -84,18 +93,29 @@ def logout():
 
 
 @app.route('/delete', methods=["GET","POST"])
+@login_required
 def delete():
-    if request.method == "POST":
-        #get item and delete with data base
-        cursor = get_db().cursor()
-        id = int(request.form["item_name"])
-        sql = ("DELETE FROM Food WHERE ID=?")
-        cursor.execute(sql,(id,))
-        get_db().commit()
+    if 'logged_in' in session:
+        if request.method == "POST":
+            #get item and delete with data base
+            cursor = get_db().cursor()
+            id = int(request.form["item_name"])
+            sql = ("DELETE FROM User WHERE CommentID=?")
+            cursor.execute(sql,(id,))
+            get_db().commit()
     return redirect('/home')
 
-
-
+@app.route('/add', methods=["GET",'POST'])
+def add():
+    if request.method == "POST":
+        #adds comments into table
+        cursor = get_db().cursor()
+        new_name = request.form["Comment"]
+        food_ID = request.form["FoodID"]
+        sql = "INSERT INTO User (FoodID,Comment) VALUES (?,?)"
+        cursor.execute(sql,(new_name,food_ID))
+        get_db().commit()
+    return redirect('/home')
 
 #Debuging incase of error
 if __name__ == '__main__':
