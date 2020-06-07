@@ -40,33 +40,31 @@ def login_required(f):
 def index():
     return render_template("index.html")
 
+#Home Page
 @app.route('/home', methods=['GET', 'POST'])
 def home():
+    #display all data from menu
     cursor = get_db().cursor()
     sql = ("SELECT * FROM Food")
     cursor.execute(sql)
+    #reults == database
     results = cursor.fetchall()
+    
+    #Show user comments where ID = FoodID
     cursor = get_db().cursor()
     sql = ("SELECT User.Comments, User.CommentID FROM Food JOIN User ON Food.ID=User.FoodID")
     cursor.execute(sql)
+    #comments == database
     comments = cursor.fetchall()
 
     return render_template("shop.html", results=results, comments=comments) #renders a templet 
 
 
 
-
-#Comments from users
-@app.route('/comments', methods=['GET','POST'])
-def user():
-    
-    return render_template("shop.html", comments=comments)
-
-
 #Admin login 
 @app.route('/login' , methods=['GET', 'POST'])
 def login():
-    #if user already logged in
+    #if user already logged in then stop them
     if 'logged_in' in session:
             flash('You have logged in already')
             return redirect(url_for('home'))
@@ -83,7 +81,7 @@ def login():
 
 #Logout
 @app.route('/logout')
-@login_required
+@login_required #Need to login first before logout
 def logout():
     #removes login key
     session.pop('logged_in', None)
@@ -91,7 +89,7 @@ def logout():
     return redirect(url_for('index')) #send user back to index page
 
 
-
+#Comment Deleting from Admin
 @app.route('/delete', methods=["GET","POST"])
 @login_required
 def delete():
@@ -105,14 +103,16 @@ def delete():
             get_db().commit()
     return redirect('/home')
 
+#Comment Adding from users
 @app.route('/add', methods=["GET",'POST'])
 def add():
     if request.method == "POST":
         #adds comments into table
         cursor = get_db().cursor()
         new_name = request.form["Comment"]
-        food_ID = request.form["FoodID"]
-        sql = "INSERT INTO User (FoodID,Comment) VALUES (?,?)"
+        food_ID = int(request.form["FoodID"])
+        #when the FoodID matches the texts ID
+        sql = "INSERT INTO User (Comments,FoodID) VALUES (?,?)"
         cursor.execute(sql,(new_name,food_ID))
         get_db().commit()
     return redirect('/home')

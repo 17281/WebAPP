@@ -32,27 +32,30 @@
         <tr>
            <th>Name</th>
            <th>Description</th>
-           
         </tr>
+
         {% for item in results %}
         <tr>
             <td>{{ item[1] }}</td>
             <td>{{ item[2] }}</td>
-            
-            
-      </tr>
+        </tr>
+        
+        <form action="/add" method="post">
+            <h2>Enter Comment</h2>
+            <input type="text" name="Comment">
+            <input type="hidden" name="FoodID" value="{{item[0]}}">
+            <input type="submit" value="add">
+        </form>
         {% endfor %}
-    
-
         </table>
+
         <table>
-            <tr>
-                <th>Comments</th>
-            </tr>
+        <tr>
+            <th>Comments</th>
+        </tr>
         {% for comment in comments %}
         <tr>
-            <td>{{ comment[0] }}</td>  
-             
+            <td><h4>User: </h4>{{ comment[0] }}</td>  
         <td>
             <form action="/delete" method="post">
             <input type="hidden" name="item_name" value="{{comment[1]}}"> 
@@ -63,11 +66,7 @@
         {% endfor %}
 
         </table>
-        <form action="/add" method="post">
-            <h2>Enter Comment</h2>
-            <input type="text" name="Comment">
-            <input type="submit" value="add">
-            </form>
+        
 
 </body>
 </html>
