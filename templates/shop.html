@@ -7,7 +7,7 @@
     <title>Welcome to the shop</title>
 </head>
 <body>
-    <h1>Working progress</h1>
+    <h1>WELCOME TO SHOP</h1>
     <div class="container">
         
         <form action="/login">
@@ -32,41 +32,36 @@
         <tr>
            <th>Name</th>
            <th>Description</th>
+           <th>Comments</th>
+           <th>Add comments</th>
         </tr>
-
+        
+        {% set i = 0 %}
         {% for item in results %}
         <tr>
             <td>{{ item[1] }}</td>
             <td>{{ item[2] }}</td>
-        </tr>
-        
+            <td><h4>User: </h4>{{ comments[i] }}</td>
+        <td>
+            <form action="/delete" method="post">
+            <input type="hidden" name="item_name" value="{{comments[i][1]}}"> 
+            <input type="submit" value="delete">
+            </form>
+        </td>
+
+        <td>
         <form action="/add" method="post">
-            <h2>Enter Comment</h2>
+            <h5>Enter Comment</h5>
             <input type="text" name="Comment">
             <input type="hidden" name="FoodID" value="{{item[0]}}">
             <input type="submit" value="add">
         </form>
-        {% endfor %}
-        </table>
-
-        <table>
-        <tr>
-            <th>Comments</th>
-        </tr>
-        {% for comment in comments %}
-        <tr>
-            <td><h4>User: </h4>{{ comment[0] }}</td>  
-        <td>
-            <form action="/delete" method="post">
-            <input type="hidden" name="item_name" value="{{comment[1]}}"> 
-            <input type="submit" value="delete">
-            </form>
         </td>
         </tr>
-        {% endfor %}
-
-        </table>
         
+        {% set i = i+1 %}
+        {% endfor %}
+        </table>
 
 </body>
 </html>

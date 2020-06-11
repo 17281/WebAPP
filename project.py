@@ -11,25 +11,27 @@ app = Flask(__name__)
 app.secret_key = "my precious"
 DATABASE = "Menu.db"
 
-
+#Database connection
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
     return db
-
+#Close the Dadtbase
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
 
+#For tasks which needs Login
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else: 
+            #flashes a message
             flash('Please login first')
             return redirect(url_for('login'))
     return wrap
@@ -49,14 +51,14 @@ def home():
     cursor.execute(sql)
     #reults == database
     results = cursor.fetchall()
-    
+    print (results)
     #Show user comments where ID = FoodID
     cursor = get_db().cursor()
     sql = ("SELECT User.Comments, User.CommentID FROM Food JOIN User ON Food.ID=User.FoodID")
     cursor.execute(sql)
     #comments == database
     comments = cursor.fetchall()
-
+    print (comments)
     return render_template("shop.html", results=results, comments=comments) #renders a templet 
 
 
@@ -98,7 +100,9 @@ def delete():
             #get item and delete with data base
             cursor = get_db().cursor()
             id = int(request.form["item_name"])
+            print(id)
             sql = ("DELETE FROM User WHERE CommentID=?")
+            #Delete comments where id == selected delete button
             cursor.execute(sql,(id,))
             get_db().commit()
     return redirect('/home')
@@ -106,15 +110,20 @@ def delete():
 #Comment Adding from users
 @app.route('/add', methods=["GET",'POST'])
 def add():
+    error = None
     if request.method == "POST":
         #adds comments into table
         cursor = get_db().cursor()
         new_name = request.form["Comment"]
-        food_ID = int(request.form["FoodID"])
-        #when the FoodID matches the texts ID
-        sql = "INSERT INTO User (Comments,FoodID) VALUES (?,?)"
-        cursor.execute(sql,(new_name,food_ID))
-        get_db().commit()
+        if new_name == "":
+            error = 'no'
+            flash('No')
+        else:
+            food_ID = int(request.form["FoodID"])
+            #when the FoodID matches the texts ID
+            sql = "INSERT INTO User (Comments,FoodID) VALUES (?,?)"
+            cursor.execute(sql,(new_name,food_ID))
+            get_db().commit()
     return redirect('/home')
 
 #Debuging incase of error
