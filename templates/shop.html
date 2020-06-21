@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
     <title>Welcome to the shop</title>
 </head>
 <body>
-    <h1>WELCOME TO SHOP</h1>
+    <h3>WELCOME TO SHOP</h3>
     <div class="container">
         
         <form action="/login">
@@ -30,22 +31,21 @@
     <h3>Menu</h3>
     <br><table>
         <tr>
-           <th>Name</th>
-           <th>Description</th>
-           <th>Comments</th>
-           <th>Add comments</th>
+           <th><h2 class="playful">Name</h2></th>
+           <th><h2 class="playful">Description</h2</th>
+           <th><h2 class="playful">Comments</h2></th>
+        </th>
         </tr>
         
         
-        {% set i = 0 %}
         {% for item in results %}
         <tr>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td> 
-            <td><h4>User: </h4>{{ comments[loop.index] }}</td>
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td> 
+            <td><h4>User: </h4>{{ item[2] }}</td>
         <td>
             <form action="/delete" method="post">
-            <input type="hidden" name="item_name" value="{{comments[i][1]}}"> 
+            <input type="hidden" name="item_name" value="{{ item[3] }}"> 
             <input type="submit" value="delete">
             </form>
         </td>
@@ -55,7 +55,7 @@
         <form action="/add" method="post">
             <h5>Enter Comment</h5>
             <input type="text" name="Comment">
-            <input type="hidden" name="FoodID" value="{{item[0]}}">
+            <input type="hidden" name="FoodID" value="{{item[4]}}">
             <input type="submit" value="add">
         </form>
         </td>

@@ -48,20 +48,20 @@ def index():
 def home():
     #display all data from menu
     cursor = get_db().cursor()
-    sql = ("SELECT * FROM Food")
+    sql = ("SELECT Food.Name, Food.Description, User.Comments, User.CommentID, User.FoodID FROM Food JOIN User ON Food.ID = User.FoodID")
     cursor.execute(sql)
     #reults == database
     results = cursor.fetchall()
     print (results)
     
-    #Show user comments where ID = FoodID
+    """#Show user comments where ID = FoodID
     cursor = get_db().cursor()
     sql = ("SELECT User.Comments, User.CommentID FROM Food JOIN User ON Food.ID=User.FoodID")
     cursor.execute(sql)
     #comments == database
     comments = cursor.fetchall()
-    print (comments)
-    return render_template("shop.html", results=results, comments=comments) #renders a templet 
+    print (comments)"""
+    return render_template("shop.html", results=results) #renders a templet 
 
 
 

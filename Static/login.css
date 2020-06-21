@@ -1,0 +1,19 @@
+body {
+    display: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    background-image: url(Pics/2mad.jpg);
+    background-size: cover;
+  }
+  
+  input[type=submit] { 
+      width: 70px; height: 75px;
+    background-image: url(Pics/Andrew.png);
+    border: none;
+    text-transform: uppercase;
+    font-family: "Archivo Black", "Archivo", sans-serif;
+    align-self: auto;
+    cursor: url(Pics/UwU.PNG), auto;
+  }
+
