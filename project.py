@@ -4,6 +4,7 @@ Harry .C
 Project:webapp
 '''
 from flask import Flask, render_template, request, g, redirect, url_for, session, flash
+from jinja2 import Template
 import sqlite3
 from functools import wraps
 
@@ -52,6 +53,7 @@ def home():
     #reults == database
     results = cursor.fetchall()
     print (results)
+    
     #Show user comments where ID = FoodID
     cursor = get_db().cursor()
     sql = ("SELECT User.Comments, User.CommentID FROM Food JOIN User ON Food.ID=User.FoodID")
@@ -96,15 +98,18 @@ def logout():
 @login_required
 def delete():
     if 'logged_in' in session:
+        error = None
         if request.method == "POST":
             #get item and delete with data base
             cursor = get_db().cursor()
             id = int(request.form["item_name"])
-            print(id)
-            sql = ("DELETE FROM User WHERE CommentID=?")
-            #Delete comments where id == selected delete button
-            cursor.execute(sql,(id,))
-            get_db().commit()
+            if id == "":
+                flash('No comments left')
+            else:
+                sql = ("DELETE FROM User WHERE CommentID=?")
+                #Delete comments where id == selected delete button
+                cursor.execute(sql,(id,))
+                get_db().commit()
     return redirect('/home')
 
 #Comment Adding from users
@@ -116,7 +121,6 @@ def add():
         cursor = get_db().cursor()
         new_name = request.form["Comment"]
         if new_name == "":
-            error = 'no'
             flash('No')
         else:
             food_ID = int(request.form["FoodID"])

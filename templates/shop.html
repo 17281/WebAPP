@@ -12,7 +12,7 @@
         
         <form action="/login">
         <br>
-        <input type='submit' value='Login'>
+        <input type='submit' value='Admin Login'>
         {% for message in get_flashed_messages() %}
             {{ message }}
         {% endfor %}
@@ -36,19 +36,21 @@
            <th>Add comments</th>
         </tr>
         
+        
         {% set i = 0 %}
         {% for item in results %}
         <tr>
             <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td><h4>User: </h4>{{ comments[i] }}</td>
+            <td>{{ item[2] }}</td> 
+            <td><h4>User: </h4>{{ comments[loop.index] }}</td>
         <td>
             <form action="/delete" method="post">
             <input type="hidden" name="item_name" value="{{comments[i][1]}}"> 
             <input type="submit" value="delete">
             </form>
         </td>
-
+       
+        
         <td>
         <form action="/add" method="post">
             <h5>Enter Comment</h5>
@@ -59,7 +61,7 @@
         </td>
         </tr>
         
-        {% set i = i+1 %}
+        
         {% endfor %}
         </table>
 
