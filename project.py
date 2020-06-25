@@ -53,14 +53,6 @@ def home():
     #reults == database
     results = cursor.fetchall()
     print (results)
-    
-    """#Show user comments where ID = FoodID
-    cursor = get_db().cursor()
-    sql = ("SELECT User.Comments, User.CommentID FROM Food JOIN User ON Food.ID=User.FoodID")
-    cursor.execute(sql)
-    #comments == database
-    comments = cursor.fetchall()
-    print (comments)"""
     return render_template("shop.html", results=results) #renders a templet 
 
 
