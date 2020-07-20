@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Comments</title>
+</head>
+<body>
+        <br><table>
+                <tr>
+                   <th><h2>Comments</h2></th>
+                </tr>
+                
+                
+                {% for item in results %}
+                <tr>
+                    <td>{{ item[0] }}</td>
+        
+                <th>
+                <form action="/add" method="post">
+                    <h5>Enter Comment</h5>
+                    <input type="text" name="Comment">
+                    <input type="hidden" name="FoodID" value="{{item[2]}}">
+                    <input class="button" type="submit" value="add">
+                </form> </th>
+                
+                <td>
+                    <form action="/delete" method="post">
+                    <input type="hidden" name="item_name" value="{{ item[1] }}"> 
+                    <input class="button" type="submit" value="delete">
+                    </form>
+                </td>
+                </td>
+                </tr>
+                
+                
+                {% endfor %}
+                </table>
+        
+</body>
+</html>

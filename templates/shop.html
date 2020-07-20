@@ -28,59 +28,27 @@
     </div>
 
     <div class="row">
+        <a href="/fill/1">
         <div class="column">
-            <img src="/static/Pics/Filler.jpg" alt="Dino">
+            <img  src="/static/Pics/Filler.jpg" alt="Dino" >
             <span class="title">I'm The Dino-Man</span>
             <span class="text">I Do Dino-Stuff</span>
-        </div>
+        </div></a>
+
+        <a href="/fill/2">
         <div class="column">
             <img src="/static/Pics/filler.png" alt="Dino">
             <span class="title">Speggeht</span>
             <span class="text">Pasta</span>
-        </div>
+        </div></a>
+         
+        <a href="/fill/3">
         <div class="column">
             <img src="/static/Pics/images.jpg" alt="Dino">
             <span class="title">Pineapple with legs</span>
             <span class="text">What else do i need to add</span>
-        </div>
+        </div></a>
     </div>
-
-    <h3>Menu</h3>
-    <br><table>
-        <tr>
-           <th><h2 class="playful">Name</h2></th>
-           <th><h2 class="playful">Description</h2</th>
-           <th><h2 class="playful">Comments</h2></th>
-        </th>
-        </tr>
-        
-        
-        {% for item in results %}
-        <tr>
-            <td>{{ item[0] }}</td>
-            <td>{{ item[1] }}</td> 
-            <td><h4>User: </h4>{{ item[2] }}</td>
-        <td>
-            <form action="/delete" method="post">
-            <input type="hidden" name="item_name" value="{{ item[3] }}"> 
-            <input type="submit" value="delete">
-            </form>
-        </td>
-       
-        
-        <td>
-        <form action="/add" method="post">
-            <h5>Enter Comment</h5>
-            <input type="text" name="Comment">
-            <input type="hidden" name="FoodID" value="{{item[4]}}">
-            <input type="submit" value="add">
-        </form>
-        </td>
-        </tr>
-        
-        
-        {% endfor %}
-        </table>
-
 </body>
+    
 </html>

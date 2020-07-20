@@ -1,5 +1,5 @@
 :root {
-  --background: #E4FFF7;
+  --background: rgb(88, 114, 129);
   --shadow: #E485F8;
   --menu: pink;
   --menu_text: white;
@@ -9,7 +9,7 @@
 body {
   align-items: center;
   justify-content: center;
-  background-color: lightblue;
+  background-color: rgb(83, 102, 109);
 }
 
 h3{
@@ -92,6 +92,9 @@ img{
   font-size: 1.6em;
   text-shadow: 1px 5px 10px black;
   transition-duration: .3s;
+}
+.button{
+  color: #E485F8;
 }
 
 .text{
