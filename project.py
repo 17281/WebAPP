@@ -45,16 +45,15 @@ def index():
     return render_template("index.html")#Not needed
 #================================================================================================
 
-@app.route('/fill/<int:post_id>', methods=['GET', 'POST'])
+@app.route('/fill/<int:post_id>', methods=['GET', 'POST']) #automatic updating item id
 def fill(post_id):
-    
     #display all comments from User
     cursor = get_db().cursor()
     sql = ("SELECT Comments, CommentID, FoodID FROM User WHERE FoodID = ?")#selects the selected items where foodid = pic id
     cursor.execute(sql,(post_id,))
     
     results = cursor.fetchall()
-    return render_template("comment.html", results=results)
+    return render_template("comment.html", results=results, id=post_id)
 
 #Home Page
 @app.route('/home', methods=['GET', 'POST'])
@@ -87,7 +86,7 @@ def login():
             session['logged_in'] = True
             flash('You are logged in as Admin') #tell user that they logged in
             return redirect(url_for('home')) #Move to home if admin is true
-    return render_template("login.html", error=error) #renders the templet
+    return render_template("login.html", error=error) #renders the login page
 
 #Logout
 @app.route('/logout')
@@ -100,41 +99,38 @@ def logout():
 
 
 #Comment Deleting from Admin
-@app.route('/delete', methods=["GET","POST"])
+@app.route('/delete/<int:post_id>', methods=["GET","POST"])
 @login_required
-def delete():
+def delete(post_id):
     if 'logged_in' in session:
         error = None
         if request.method == "POST":
             #get item and delete with data base
             cursor = get_db().cursor()
-            id = int(request.form["item_name"])#Not Functional----------------
-            if id == "":
-                flash('No comments left')#------------------------------------
-            else:
-                sql = ("DELETE FROM User WHERE CommentID=?")
-                #Delete comments where id == selected delete button
-                cursor.execute(sql,(id,))
-                get_db().commit()
-    return redirect('/home')
+            item_name = int(request.form["CommentID"])
+            sql = ("DELETE FROM User WHERE CommentID=?")
+            #Delete comments where id == selected delete button
+            cursor.execute(sql,(item_name,))
+            get_db().commit()
+    return redirect(url_for("fill", post_id=post_id))#renders delete page 
 
 #Comment Adding from users
-@app.route('/add', methods=["GET",'POST'])
-def add():
-    error = None
+@app.route('/add/<int:post_id>', methods=["GET",'POST'])
+def add(post_id):
     if request.method == "POST":
-        #adds comments into table
+        #adds comments into table=================================
         cursor = get_db().cursor()
         new_name = request.form["Comment"]
-        if new_name == "":#IF user tries to add Blanks into database
-            flash('No')#NO
+
+        if len(new_name) == 0 or len(new_name) > 100:#IF user tries to add Blanks or over 100 words into database
+            flash('No')#NO+++++ Prevents SPAMMERS
         else:
             food_ID = int(request.form["FoodID"])
             #when the FoodID matches the texts ID
-            sql = "INSERT INTO User (Comments,FoodID) VALUES (?,?)"
-            cursor.execute(sql,(new_name,food_ID))#Execute sql
+            sql = "INSERT INTO User (Comments,FoodID) VALUES (?,?)" 
+            cursor.execute(sql,(new_name,post_id))#Execute sql
             get_db().commit()
-    return redirect('/home')
+    return redirect(url_for("fill", post_id=post_id))#renders add comment page
 
 #Debuging incase of error
 if __name__ == '__main__':
