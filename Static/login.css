@@ -1,3 +1,5 @@
+
+/* Background */
 body {
     display: auto;
     align-items: center;
@@ -7,6 +9,7 @@ body {
     background-size: cover;
   }
   
+  /* Styling for buttons*/
   input[type=submit] { 
       width: 70px; height: 75px;
     background-image: url(Pics/Andrew.png);

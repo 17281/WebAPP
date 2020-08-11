@@ -6,12 +6,15 @@
   --text: #5362F6;
 }
 
+/* Background */
 body {
   align-items: center;
   justify-content: center;
+  overflow-y: scroll; /* Add the ability to scroll */
   background-color: rgb(83, 102, 109);
 }
 
+/* Style for secondary text*/
 h3{
   text-align:center;
   font-size: 70px;
@@ -27,6 +30,7 @@ h3{
       5px 5px var(--menu), 5.5px 5.5px var(--menu), 5.25px 5.25px var(--menu), 5.75px 5.75px var(--menu);
 }
 
+/* Style for main text*/
 h2 {
   font-size: 65px;
   text-transform: uppercase;
@@ -43,6 +47,7 @@ h2 {
 }
 
 
+/* Header Font*/
 .playful {
     color: var(--text);
     text-shadow: 6px 6px var(--shadow),
@@ -60,6 +65,8 @@ h2 {
   margin: 10px auto;
   height: auto;
 }
+
+
 .column{
   width: calc(30% - 6px);
   overflow:hidden;
@@ -70,6 +77,8 @@ h2 {
   position:relative;
   float:left;
 }
+
+/* image displayed */
 img{
   width: 100%;
   transition-duration: .3s;
@@ -79,6 +88,7 @@ img{
   cursor:pointer;
 }
 
+/* Headers for each img description*/ 
 .title{
   position:absolute;
   display:block;
@@ -93,10 +103,14 @@ img{
   text-shadow: 1px 5px 10px black;
   transition-duration: .3s;
 }
+
+
+/* Button for clicking */
 .button{
   color: #E485F8;
 }
 
+/* Text color,style and other for the discripction */
 .text{
   position:absolute;
   top: 70%;
@@ -111,17 +125,23 @@ img{
   transition-duration: .3s;
   transform: translate(-50%, -50%) 
 }
+
+/* Animates a transparent cover over the images */
 .column:hover img{
   transform: scale(1);
   transition-duration: .3s;
   filter: grayscale(60%);
   opacity: .5;
 }
+
+/* Animates a white text with transparency */
 .column:hover span{
   color:white;
   display: block;
   transition-duration: .3s;
 }
+
+/* display text when cursor hover over img*/
 @media only screen and (max-width: 900px) {
     .column {
         width: calc(50% - 6px);
@@ -131,4 +151,10 @@ img{
     .column {
         width: 100%;
     }
+}
+
+
+/* Hides scollbar */
+body::-webkit-scrollbar {
+  display: none;
 }

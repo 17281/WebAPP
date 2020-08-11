@@ -1,0 +1,21 @@
+body{
+    text-align: center;
+}
+body.center {
+    background-color: #eee;
+    text-align: center;
+}
+
+
+
+/* Creates a table for each comment*/
+#hello{
+    border: 1.51px solid cornflowerblue;
+    float: center;
+    margin: auto;
+    text-align: center;
+}
+
+table {
+    text-align: center;
+}
