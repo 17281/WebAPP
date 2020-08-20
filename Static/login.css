@@ -6,6 +6,7 @@ body {
     justify-content: center;
     background-color: lightblue;
     background-image: url(Pics/2mad.jpg);
+    filter: contrast(2000%);
     background-size: cover;
   }
   

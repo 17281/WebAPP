@@ -1,10 +1,13 @@
 body{
     text-align: center;
+    background-color: dimgray;
 }
+
 body.center {
-    background-color: #eee;
+    
     text-align: center;
 }
+
 
 
 
@@ -13,9 +16,23 @@ body.center {
     border: 1.51px solid cornflowerblue;
     float: center;
     margin: auto;
+    background-color: floralwhite;
     text-align: center;
 }
 
 table {
     text-align: center;
+    margin: auto;
+    font-family: "Archivo Black", "Archivo", sans-serif;
 }
+
+/* Button for clicking */
+.button{
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: black;
+
+
+  }

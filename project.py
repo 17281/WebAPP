@@ -122,7 +122,7 @@ def add(post_id):
         cursor = get_db().cursor()
         new_name = request.form["Comment"]
 
-        if len(new_name) == 0 or len(new_name) > 100:#IF user tries to add Blanks or over 100 words into database
+        if len(new_name) == 0 or len(new_name) > 50:#IF user tries to add Blanks or over 100 words into database
             flash('No')#NO+++++ Prevents SPAMMERS
         else:
             food_ID = int(request.form["FoodID"])
