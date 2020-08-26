@@ -60,7 +60,7 @@ def fill(post_id):
 def home():
     #display all data from menu
     cursor = get_db().cursor()
-    sql = ("SELECT Food.Name, Food.Description, User.Comments, User.CommentID, User.FoodID FROM Food JOIN User ON Food.ID = User.FoodID")#selects the selected items where the Food id = Forein key
+    sql = ("SELECT Food.Name, Food.Description, Food.Filename, Food.ID FROM Food")#selects the selected items where the Food id = Forein key
     cursor.execute(sql)
     #reults == database
     results = cursor.fetchall()
