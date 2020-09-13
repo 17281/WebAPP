@@ -8,12 +8,13 @@
     <title>Comments</title>
 </head>
 <body>
+    
         <form action='/home'>
             <input type='submit' value='Home'>
         </form>
 
         <form action='/add/{{ id }}' method="POST">
-                    <h5>Enter Comment</h5>
+                    <h2>Enter Comment</h2>
             <input type="text" name="Comment">
             <input type="hidden" name="FoodID" value="{{ id }}">
             <input class="button" type="submit" value="add">

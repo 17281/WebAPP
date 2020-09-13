@@ -4,7 +4,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow-y: scroll; /* Add the ability to scroll */
-  background-color: rgb(83, 102, 109);
+  background-color: dimgrey;
 }
 
 /* Style for secondary text*/
@@ -68,7 +68,7 @@ input[type=submit] {
 .column img{
   width: 100%;
   height: 300px;
-  transition-duration: .3s;
+  transition-duration: .1s;
   max-width: 100%;
   display:block;
   overflow:hidden;
@@ -89,7 +89,7 @@ input[type=submit] {
   font-weight: bold;
   font-size: 1.6em;
   text-shadow: 1px 5px 10px black;
-  transition-duration: .3s;
+  transition-duration: .1s;
 }
 
 /* Text color,style and other for the discripction */
@@ -104,14 +104,14 @@ input[type=submit] {
   font-size: 1em;
   display:none;
   margin-right: -50%;
-  transition-duration: .3s;
+  transition-duration: .1s;
   transform: translate(-50%, -50%) 
 }
 
 /* Animates a transparent cover over the images */
 .column:hover img{
   transform: scale(1);
-  transition-duration: .3s;
+  transition-duration: .1s;
   filter: grayscale(70%);
   opacity: .1;
   filter: contrast(20000%);
@@ -121,7 +121,7 @@ input[type=submit] {
 .column:hover span{
   color:white;
   display: block;
-  transition-duration: .3s;
+  transition-duration: .1s;
 }
 
 /* display text when cursor hover over img*/

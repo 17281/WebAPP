@@ -4,21 +4,21 @@ body{
 }
 
 body.center {
-    
     text-align: center;
 }
-
-
 
 
 /* Creates a table for each comment*/
 #hello{
-    border: 1.51px solid cornflowerblue;
+    border: 1px solid cornflowerblue;
     float: center;
     margin: auto;
     background-color: floralwhite;
     text-align: center;
+    padding: auto;
 }
+
+
 
 table {
     text-align: center;
