@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,40 +8,52 @@
     <link rel="stylesheet" href="{{url_for('static',filename='comment.css')}}">
     <title>Comments</title>
 </head>
+
 <body>
-    
+
+
+    <h2>
+        Enter Comment
         <form action='/home'>
             <input type='submit' value='Home'>
         </form>
+    </h2>
+    <form action='/add/{{ id }}' method="POST" class="enter">
 
-        <form action='/add/{{ id }}' method="POST">
-                    <h2>Enter Comment</h2>
-            <input type="text" name="Comment">
-            <input type="hidden" name="FoodID" value="{{ id }}">
-            <input class="button" type="submit" value="add">
-        </form>
-        
+        <input type="text" name="Comment">
+        <input type="hidden" name="FoodID" value="{{ id }}">
+        <input class="button" type="submit" value="add">
+        <br>
         {% for message in get_flashed_messages() %}
         {{ message }}
         {% endfor %}
-        <h2>Comments</h2>
-        <table>
-                {% for item in results %}
-                
-                <tr>
-                    <td class="comment" id="hello">{{ item[0] }}
-                    <form action="/delete/{{ id }}" method="post" class="delete">
-                    <input type="hidden" name="CommentID" value="{{ item[1] }}"> 
+
+    </form>
+
+
+
+    <br><br><br><br>
+    <h1>Comments</h1>
+    <br><br>
+    <table>
+        {% for item in results %}
+
+        <tr>
+            <td class="comment" id="hello">{{ item[0] }}
+                <form action="/delete/{{ id }}" method="post" class="delete">
+                    <input type="hidden" name="CommentID" value="{{ item[1] }}">
                     <input class="button" type="submit" value="delete">
-                    </form></td>
-                </tr>
-                
-                
-                    
-                
-                
+                </form>
+            </td>
+        </tr>
+
+
+
+
+
         {% endfor %}
-        </table>
-        
+    </table>
+
 </body>
+
 </html>

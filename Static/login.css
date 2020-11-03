@@ -1,33 +1,41 @@
 
 /* Background */
 body {
-    display: fill;
-    align-items: center;
-    justify-content: center;
-    float: center;
     text-align: center;
     background-color: lightblue;
-    background-image: url(Pics/2mad.PNG);
-    background-size: 100%;
+    
   }
+  
+
+  h1 {
+    text-transform: uppercase;
+    border-radius: 35px;
+    background: black;
+    width: 100%;
+    color: white;
+    padding: 0px;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -2px;
+    font-weight: bold; 
+    position: relative;
+  }
+
+  h1 input[type=submit] {
+    float: none;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+  }  
   
   /* Styling for buttons*/
   input[type=submit] { 
-      width: 70px; height: 75px;
-    background-image: url(Pics/facemad.PNG);
-    border: none;
-    background-size: 100%;
-    text-transform: uppercase;
-    font-family: "Archivo Black", "Archivo", sans-serif;
-    align-self: auto;
-    cursor: url(Pics/UwU.PNG), auto;
     color: white;
-  }
-
-  input[type=submit]:hover {
-    opacity: 0.5;
-  }
-
-  h1 {
-    color: white;
+    border: white solid;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: black;
+    text-align: right;
+    width: 100px;
   }

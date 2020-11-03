@@ -4,20 +4,30 @@ body {
   align-items: center;
   justify-content: center;
   overflow-y: scroll; /* Add the ability to scroll */
-  background-color: dimgrey;
+  background-image: url(Pics/images.png);
+  padding: 40px;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
+
 
 /* Style for secondary text*/
 h3{
-  text-align:center;
-  font-size: 70px;
   text-transform: uppercase;
-  font-weight: normal;
   display: block;
-  height: auto;
-  margin: 5rem auto;
   margin: calc(25vh - 15rem) auto;
   text-align: center;
+  border-radius: 35px;
+  background: black;
+  width: auto;
+  height: fill;
+  font-family: times, Times New Roman, times-roman, georgia, serif;
+	padding: 0px;
+	font-size: 69px;
+	line-height: 69px;
+	letter-spacing: -2px;
+  font-weight: bold; 
+  color: white;
 }
 
 /* Style for main text*/
@@ -34,24 +44,20 @@ h2 {
   text-align: top;
   margin: 10rem auto;
   margin: calc(50vh - 5rem) auto;
+  
 }
 
 
-.row{
-  width: fit-content;
-  margin: 10px auto;
-  height: auto;
-}
 
 input[type=submit] {
   color: white;
-  border: none;
+  border: white solid;
   padding: 5px;
   border-radius: 4px;
   background-color: black;
   text-align: center;
   float: right;
-  margin-top: -60px;
+  margin-top: -65px;
 }
 
 .column{
@@ -59,21 +65,24 @@ input[type=submit] {
   overflow:hidden;
   height: fit-content;
   margin:3px;
-  padding: 0;
   display:block;
   position:relative;
   float:left;
-  
+  padding: 25px;
 }
 .column img{
   width: 100%;
-  height: 300px;
+  height: 400px;
   transition-duration: .1s;
   max-width: 100%;
   display:block;
   overflow:hidden;
+  margin: 40px;
   cursor:pointer;
-  filter: contrast(200%);
+  border: black solid;
+  float: left;
+  border-radius: 15px;
+  padding: 0px; 
 }
 
 /* Headers for each img description*/ 
@@ -105,17 +114,17 @@ input[type=submit] {
   display:none;
   margin-right: -50%;
   transition-duration: .1s;
-  transform: translate(-50%, -50%) 
+  transform: translate(-50%, -50%);
 }
 
 /* Animates a transparent cover over the images */
 .column:hover img{
   transform: scale(1);
   transition-duration: .1s;
-  filter: grayscale(70%);
-  opacity: .1;
-  filter: contrast(20000%);
+  filter: grayscale(90%);
+  opacity: 1;
 }
+
 
 /* Animates a white text with transparency */
 .column:hover span{
@@ -136,8 +145,3 @@ input[type=submit] {
     }
 }
 
-
-/* Hides scollbar */
-body::-webkit-scrollbar {
-  display: none;
-}
